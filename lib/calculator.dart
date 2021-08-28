@@ -43,6 +43,7 @@ class _CalculatorState extends State<Calculator> {
       body: Container(
         color: Colors.deepOrange[100],
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Expanded(
               child: SafeArea(
