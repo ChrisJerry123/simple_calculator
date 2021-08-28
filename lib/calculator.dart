@@ -43,7 +43,6 @@ class _CalculatorState extends State<Calculator> {
       body: Container(
         color: Colors.deepOrange[100],
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Expanded(
               child: SafeArea(
@@ -80,7 +79,8 @@ class _CalculatorState extends State<Calculator> {
                 itemCount: buttons.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   // Silahkan di nonaktifkan jika layarnya panjang
-                  childAspectRatio: 5 / 4,
+                  // childAspectRatio: 5 / 4,
+                  childAspectRatio: screenRatio(),
                   crossAxisCount: 4,
                 ),
                 itemBuilder: (BuildContext context, int index) {
@@ -123,6 +123,7 @@ class _CalculatorState extends State<Calculator> {
                       buttonTapped: () {
                         setState(() {
                           equalTapped();
+                          // userQuestion = userAnswer;
                         });
                       },
                     );
@@ -179,5 +180,21 @@ class _CalculatorState extends State<Calculator> {
     double eval = expression.evaluate(EvaluationType.REAL, cm);
 
     userAnswer = eval.toString();
+  }
+
+  double screenRatio() {
+    // var ratio = MediaQuery.of(context).size;
+    var ratio = WidgetsBinding.instance.window.physicalSize;
+    double value;
+    if (ratio.height / ratio.width == (16 / 9)) {
+      value = 5 / 4;
+    } else if (ratio.height / ratio.width == (19.5 / 9)) {
+      value = 1 / 1;
+    } else {
+      value = 5 / 4;
+    }
+    return value;
+    // double a = 2;
+    // return a;
   }
 }
